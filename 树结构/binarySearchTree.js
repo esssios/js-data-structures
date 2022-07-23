@@ -218,6 +218,22 @@ function BinarySearchTree() {
 
             // 3、将删除节点的左子树 = currentNode.left
             successor.left = currentNode.left
+
+
+            // 前驱删除,即选择前驱节点插入delNode的位置
+            // 1、获取前驱节点
+            // let precursor = this.getPrecursor(currentNode)
+            // // 2、判断是否根节点
+            // if (currentNode === this.root) {
+            //     this.root = precursor
+            // }else if (isLeftChild) {
+            //     parentNode.left = precursor
+            // }else {
+            //     parentNode.right = precursor
+            // }
+
+            // // 3、将删除节点的右子树 = currentNode.right
+            // precursor.right = currentNode.right
         }
     }
 
@@ -240,6 +256,27 @@ function BinarySearchTree() {
             successor.right = delNode.right
         }
         return successor
+    }
+
+    // 找前驱节点的方法
+    // 前驱节点特点：一定是delNode左子树的最大值，并且只比delNode的值小一点点
+    BinarySearchTree.prototype.getPrecursor = function (delNode) {
+        let precursor = delNode
+        let currentNode = delNode.left
+        let precursorParent = delNode
+        // 循环查找
+        while (currentNode !== null) {
+            precursorParent = precursor
+            precursor = currentNode
+            currentNode = currentNode.right
+        }
+        // 判断寻找的前驱节点是否直接就是delNode的left节点
+        if (precursor !== delNode.left) {
+            precursorParent.right = precursor.left
+            precursor.left = delNode.left
+        }
+
+        return precursor
     }
 }
 
