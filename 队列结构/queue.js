@@ -36,6 +36,7 @@ function Queue(elements) {
 // 击鼓传花
 function passGame(nameList, num) {
     // 1、名字加入队列
+    
         let queue = new Queue(nameList)
     // for (let i = 0; i < nameList.length; i++) {
     //     queue.enqueue(nameList[i])
